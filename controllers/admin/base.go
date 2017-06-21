@@ -49,3 +49,14 @@ func (c *BaseController) Fail(code int64, msg string) {
 	}
 	c.StopRun()
 }
+
+//Resp 返回json格式
+func (c *BaseController) Resp(code int64, msg string, data interface{}) {
+	c.Data["json"] = map[string]interface{}{
+		"code": code,
+		"msg":  msg,
+		"data": data,
+	}
+	c.ServeJSON()
+	c.StopRun()
+}
