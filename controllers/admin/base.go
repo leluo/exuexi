@@ -7,11 +7,20 @@ import (
 //BaseController 常用函数封装
 type BaseController struct {
 	beego.Controller
+	sitename string
 }
 
 //Prepare 函数执行之前需要执行的函数
 func (c *BaseController) Prepare() {
-
+	c.sitename = beego.AppConfig.String("sitename")
+	// models, action := c.GetControllerAndAction()
+	// if models == "User" && action == "Login" {
+	// 	return
+	// }
+	// admin := c.GetSession("admin")
+	// if admin == nil {
+	// 	c.Redirect(c.URLFor("admin.User.Login", "redirect", url.QueryEscape(c.Ctx.Input.URI())), 302)
+	// }
 }
 
 //Success 成功时操作的函数
