@@ -1,10 +1,9 @@
 package admin
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
-
-	"encoding/json"
 
 	"github.com/astaxie/beego"
 )
@@ -85,7 +84,6 @@ func (c *BaseController) Resp(code int64, msg string, data interface{}) {
 }
 
 //获取菜单列表
-
 func (c *BaseController) GetMenu() (list []*Menu) {
 	data, err := ioutil.ReadFile("conf/menu.json")
 	if err != nil {

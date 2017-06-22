@@ -1,0 +1,216 @@
+[
+	{
+		"name": "首页",
+		"icon": "icon-home",
+		"role": "A",
+		"module": "IndexController",
+		"action": "IndexController.Index"
+	},
+	{
+		"name": "驾校管理",
+		"icon": "icon-organization",
+		"role": "B",
+		"module": "SchoolController",
+		"submenu": [
+			{
+				"name": "培训机构",
+				"parent": "B",
+				"action": "SchoolController.SchoolList"
+			},
+			{
+				"name": "学员管理",
+				"parent": "B",
+				"action": "SchoolController.StudentList"
+			},
+			{
+				"name": "教练员管理",
+				"parent": "B",
+				"action": "SchoolController.CoachList"
+			},
+				{
+				"name": "驾校时段管理",
+				"parent": "B",
+				"action": "ClassController.CourseList"
+			},
+			{
+				"name": "考核员管理",
+				"parent": "B",
+				"action": "SchoolController.ExaminerList"
+			},
+			{
+				"name": "安全员管理",
+				"parent": "B",
+				"action": "SchoolController.SecurityGuardList"
+			},
+			{
+				"name": "教练车管理",
+				"parent": "B",
+				"action": "SchoolController.CarList"
+			},
+			{
+				"name": "计时终端管理",
+				"parent": "B",
+				"action": "SchoolController.TerminalList"
+			},
+			
+			{
+				"name": "教学区域管理",
+				"parent": "B",
+				"action": "SchoolController.FieldList"
+			},
+			{
+				"name": "缴费类别管理",
+				"parent": "B",
+				"action": "SchoolController.StandardList"
+			}
+		]
+	},
+	{
+		"name": "学时管理",
+		"icon": "icon-clock",
+		"role": "C",
+		"module": "LearnrecordController",
+		"submenu": [
+			{
+				"name": "电子教学日志",
+				"parent": "C",
+				"action": "LearnrecordController.RecordList"
+			},
+			{
+				"name": "结业考核管理",
+				"parent": "C",
+				"action": "LearnrecordController.Graduation"
+			},
+			{
+				"name": "学时全流程管理",
+				"parent": "C",
+				"action": "LearnrecordController.Recordwholeprocess"
+			},
+			{
+		     "name":"考核管理",
+		     "parent": "C",
+					"action":"ExamController.QueryList"
+			}
+		]
+	},
+	{
+		"name": "约车管理",
+		"icon": "icon-book-open",
+		"role": "D",
+		"module": "EvaluationController",
+		"submenu": [
+			{
+				"name": "订单管理",
+				"parent": "D",
+				"action": "EvaluationController.OrderList"
+			},
+			{
+				"name": "教练排班统计",
+				"parent": "D",
+				"action": "EvaluationController.CoachSchedule"
+			},
+			{
+				"name": "训练场统计",
+				"parent": "D",
+				"action": "EvaluationController.FieldCount"
+			},
+			{
+				"name": "上课次数统计",
+				"parent": "D",
+				"action": "EvaluationController.KeCheng"
+			}
+		]
+	},
+	{
+		"name": "评价管理",
+		"icon": "icon-bubble",
+		"role": "E",
+		"module": "ComplaintController",
+		"submenu": [
+			
+			{
+				"name": "驾校评价",
+				"parent": "E",
+				"action": "EvaluationController.EvaluationSchool"
+			},
+			{
+				"name": "教练评价",
+				"parent": "E",
+				"action": "EvaluationController.EvaluationCoach"
+			},
+			{
+				"name": "评价查询",
+				"parent": "E",
+				"action": "EvaluationController.EvaluationList"
+			},
+	
+			{
+				"name": "驾校投诉",
+				"parent": "E",
+				"action": "ComplaintController.ComplaintSchool"
+			},
+			{
+				"name": "教练投诉",
+				"parent": "E",
+				"action": "ComplaintController.ComplaintCoach"
+			},
+			{
+				"name": "投诉查询",
+				"parent": "E",
+				"action": "ComplaintController.ComplaintList"
+			}
+		]
+	},
+	
+	{
+		"name":"财务报表管理",
+		"icon":"icon-rocket",
+		"role": "F",
+		"module":"PayController",
+		"submenu":[
+			{
+				"name": "缴费录入",
+				"parent": "F",
+				"action": "PayController.PayList"
+			},
+			{
+				"name": "支付信息",
+				"parent": "F",
+				"action": "PayController.PayLists"
+			}
+		]
+	},
+	{
+		"name": "设置",
+		"icon": "icon-settings",
+		"role": "G",
+		"module": "SettingController",
+		"submenu": [
+			{
+				"name": "用户管理",
+				"parent": "G",
+				"action": "SettingController.UserLists"
+			},
+			{
+				"name": "角色管理",
+				"parent": "G",
+				"action": "SettingController.RoleList"
+			},
+			{
+				"name": "操作日志",
+				"parent": "G",
+				"action": "SettingController.LogList"
+			},
+			{
+				"name": "权限管理",
+				"parent": "G",
+				"action": "SettingController.PrivilegeList"
+			},
+			{
+				"name": "驾校设置",
+				"parent": "G",
+				"action": "SettingController.SetBaseinfo"
+			}
+		]
+	}
+]
