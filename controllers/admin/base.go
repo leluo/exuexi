@@ -1,6 +1,11 @@
 package admin
 
 import (
+	"fmt"
+	"io/ioutil"
+
+	"encoding/json"
+
 	"github.com/astaxie/beego"
 )
 
@@ -13,6 +18,15 @@ type BaseController struct {
 //Prepare 函数执行之前需要执行的函数
 func (c *BaseController) Prepare() {
 	c.sitename = beego.AppConfig.String("sitename")
+	list := c.GetMenu()
+	for _, v := range list {
+		fmt.Println(v.Action, v.Module)
+		if len(v.Submenu) > 0 {
+			for _, submenu := range v.Submenu {
+				fmt.Println(submenu.Action, submenu.Parent)
+			}
+		}
+	}
 	// models, action := c.GetControllerAndAction()
 	// if models == "User" && action == "Login" {
 	// 	return
@@ -68,4 +82,17 @@ func (c *BaseController) Resp(code int64, msg string, data interface{}) {
 	}
 	c.ServeJSON()
 	c.StopRun()
+}
+
+//获取菜单列表
+
+func (c *BaseController) GetMenu() (list []*Menu) {
+	data, err := ioutil.ReadFile("conf/menu.json")
+	if err != nil {
+		return list
+	}
+	if err := json.Unmarshal(data, &list); err != nil {
+		return list
+	}
+	return list
 }

@@ -1,35 +1,17 @@
 package admin
 
 type Menu struct {
+	Name    string
 	Icon    string
-	Fa      string
-	Href    string
-	Name    string
-	Disable bool
-	subs    []*SubMenu
+	Module  string
+	Action  string
+	Submenu []*Submenu
+	Role    string
 }
 
-type SubMenu struct {
-	Href    string
-	Name    string
-	Disable bool
-}
-
-func NewMenu() *Menu {
-	return new(Menu)
-}
-
-func (m *Menu) GetHome(sub ...SubMenu) Menu {
-	menu := Menu{
-		Icon:    "color5",
-		Fa:      "fa-home",
-		Href:    "Index.Index",
-		Name:    "首页",
-		Disable: true,
-		subs: []*SubMenu{
-			&SubMenu{Href: "Index.Home", Name: "哈哈驾校", Disable: true},
-			&SubMenu{Href: "Index.Ribe", Name: "成电驾校", Disable: true},
-		},
-	}
-	return menu
+type Submenu struct {
+	Name   string
+	Icon   string
+	Action string
+	Parent string
 }
