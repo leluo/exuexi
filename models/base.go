@@ -12,23 +12,23 @@ import (
 func init() {
 
 	//db_type := beego.AppConfig.String("db_type")
-	db_host := beego.AppConfig.String("db_host")
-	db_port := beego.AppConfig.String("db_port")
-	db_user := beego.AppConfig.String("db_user")
-	db_pass := beego.AppConfig.String("db_pass")
-	db_name := beego.AppConfig.String("db_name")
-	db_timezone := beego.AppConfig.String("db_timezone")
-	db_table_prefix := beego.AppConfig.String("db_table_prefix")
-	if db_port == "" {
-		db_port = "3306"
+	dbHost := beego.AppConfig.String("db_host")
+	dbPort := beego.AppConfig.String("db_port")
+	dbUser := beego.AppConfig.String("db_user")
+	dbPass := beego.AppConfig.String("db_pass")
+	dbName := beego.AppConfig.String("db_name")
+	dbTimeZone := beego.AppConfig.String("db_timezone")
+	dbTablePrefix := beego.AppConfig.String("db_table_prefix")
+	if dbPort == "" {
+		dbPort = "3306"
 	}
-	dsn := db_user + ":" + db_pass + "@tcp(" + db_host + ":" + db_port + ")/" + db_name + "?charset=utf8"
-	if db_timezone != "" {
-		dsn = dsn + "&loc=" + url.QueryEscape(db_timezone)
+	dsn := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8"
+	if dbTimeZone != "" {
+		dsn = dsn + "&loc=" + url.QueryEscape(dbTimeZone)
 	}
 	orm.RegisterDataBase("default", "mysql", dsn)
 	fmt.Println(dsn)
-	orm.RegisterModelWithPrefix(db_table_prefix,
+	orm.RegisterModelWithPrefix(dbTablePrefix,
 		new(User),
 	)
 	if beego.AppConfig.String("runmode") == "shanxi" {
