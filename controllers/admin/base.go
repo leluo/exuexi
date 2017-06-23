@@ -2,7 +2,6 @@ package admin
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 
 	"github.com/astaxie/beego"
@@ -12,20 +11,15 @@ import (
 type BaseController struct {
 	beego.Controller
 	sitename string
+	models   string
+	action   string
 }
 
 //Prepare 函数执行之前需要执行的函数
 func (c *BaseController) Prepare() {
 	c.sitename = beego.AppConfig.String("sitename")
-	list := c.GetMenu()
-	for _, v := range list {
-		fmt.Println(v.Action, v.Module)
-		if len(v.Submenu) > 0 {
-			for _, submenu := range v.Submenu {
-				fmt.Println(submenu.Action, submenu.Parent)
-			}
-		}
-	}
+	c.models, c.action = c.GetControllerAndAction()
+	c.Display()
 	// models, action := c.GetControllerAndAction()
 	// if models == "User" && action == "Login" {
 	// 	return
@@ -83,7 +77,7 @@ func (c *BaseController) Resp(code int64, msg string, data interface{}) {
 	c.StopRun()
 }
 
-//获取菜单列表
+//GetMenu 获取菜单列表
 func (c *BaseController) GetMenu() (list []*Menu) {
 	data, err := ioutil.ReadFile("conf/menu.json")
 	if err != nil {
@@ -93,4 +87,18 @@ func (c *BaseController) GetMenu() (list []*Menu) {
 		return list
 	}
 	return list
+}
+
+//Display 模板公共部分
+func (c *BaseController) Display() {
+	c.LayoutSections = make(map[string]string)
+	c.LayoutSections["header"] = "admin/layout/sections/header.html"
+	c.LayoutSections["footer"] = "admin/layout/sections/footer.html"
+	c.Data["menus"] = c.GetMenu()
+	//c.Data["module"] = c.module
+	// c.Data["action"] = c.module + "." + c.action
+	// c.Data["curr"] = c.SearchCurPar(c.module + "." + c.action)
+	// c.Data["admin"] = c.admin
+	// c.Data["color"] = c.Ctx.GetCookie("layout-theme-color")
+	c.Layout = "admin/layout/layout.html"
 }

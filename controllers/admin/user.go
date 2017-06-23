@@ -4,7 +4,7 @@ import (
 	m "exuexi/models"
 )
 
-//User关于后台用户的模型
+//User 关于后台用户的模型
 type User struct {
 	BaseController
 }
@@ -21,4 +21,14 @@ func (c *User) Login() {
 		}
 	}
 	c.TplName = "admin/login.html"
+}
+
+//List 用户列表
+func (c *User) List() {
+	c.TplName = "admin/user-list.html"
+}
+
+//Edit 编辑用户信息
+func (c *User) Edit() {
+	c.TplName = "admin/user-edit.html"
 }

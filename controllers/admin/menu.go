@@ -1,5 +1,6 @@
 package admin
 
+//Menu 菜单结构体
 type Menu struct {
 	Name    string
 	Icon    string
@@ -9,6 +10,7 @@ type Menu struct {
 	Role    string
 }
 
+//Submenu 子菜单结构体
 type Submenu struct {
 	Name   string
 	Icon   string

@@ -9,4 +9,5 @@ import (
 func init() {
 	beego.AutoPrefix("/admin", &admin.User{})
 	beego.AutoPrefix("/admin", &admin.Index{})
+	beego.AutoPrefix("/admin", &admin.School{})
 }
