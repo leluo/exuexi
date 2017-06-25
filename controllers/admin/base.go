@@ -3,6 +3,7 @@ package admin
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/url"
 
 	"github.com/astaxie/beego"
 )
@@ -20,14 +21,17 @@ func (c *BaseController) Prepare() {
 	c.sitename = beego.AppConfig.String("sitename")
 	c.models, c.action = c.GetControllerAndAction()
 	c.Display()
-	// models, action := c.GetControllerAndAction()
-	// if models == "User" && action == "Login" {
-	// 	return
-	// }
-	// admin := c.GetSession("admin")
-	// if admin == nil {
-	// 	c.Redirect(c.URLFor("admin.User.Login", "redirect", url.QueryEscape(c.Ctx.Input.URI())), 302)
-	// }
+}
+
+//Auth 登录认证
+func (c *BaseController) Auth() {
+	if c.models == "User" && c.action == "Login" {
+		return
+	}
+	admin := c.GetSession("admin")
+	if admin == nil {
+		c.Redirect(c.URLFor("User.Login", "redirect", url.QueryEscape(c.Ctx.Input.URI())), 302)
+	}
 }
 
 //Success 成功时操作的函数
@@ -95,10 +99,5 @@ func (c *BaseController) Display() {
 	c.LayoutSections["header"] = "admin/layout/sections/header.html"
 	c.LayoutSections["footer"] = "admin/layout/sections/footer.html"
 	c.Data["menus"] = c.GetMenu()
-	//c.Data["module"] = c.module
-	// c.Data["action"] = c.module + "." + c.action
-	// c.Data["curr"] = c.SearchCurPar(c.module + "." + c.action)
-	// c.Data["admin"] = c.admin
-	// c.Data["color"] = c.Ctx.GetCookie("layout-theme-color")
 	c.Layout = "admin/layout/layout.html"
 }
