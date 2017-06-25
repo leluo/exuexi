@@ -4,6 +4,10 @@ import (
 	m "exuexi/models"
 	"time"
 
+	"strings"
+
+	"strconv"
+
 	"github.com/astaxie/beego/orm"
 )
 
@@ -74,7 +78,31 @@ func (c *User) Edit() {
 		if err = c.ParseForm(&user); err != nil {
 			c.Fail(201, "表单解析错误")
 		}
+		if err = user.Update("Username"); err != nil {
+			c.Fail(201, "更新用户信息失败")
+		}
+		c.Success(200, "更新成功", "")
 	}
 	c.Data["user"] = user
 	c.TplName = "admin/user-edit.html"
+}
+
+//Delete 删除用户信息
+func (c *User) Delete() {
+	ids := c.GetString("id")
+	idarr := strings.Split(ids, ",")
+	if len(idarr) == 0 {
+		c.Fail(201, "请选择需要删除的信息")
+	}
+	for _, v := range idarr {
+		user := new(m.User)
+		user.Id, _ = strconv.ParseInt(v, 10, 64)
+		if err := user.Select();err!=nil {
+			c.Fail(201,"改信息不存在")
+		}
+		if err := user.Delete();err!=nil {
+			c.Fail(201,"删除信息失败")
+		}
+	}
+	c.Success(200,"删除成功","")
 }
